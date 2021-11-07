@@ -130,7 +130,7 @@ public class Ztest {
                     arraylVal[i] = 0;
                 break;
             }
-            System.out.println("arraylVal[" + i + "]: " + arraylVal[i]);
+            //System.out.println("arraylVal[" + i + "]: " + arraylVal[i]);
         
         }
 

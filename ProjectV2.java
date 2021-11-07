@@ -56,13 +56,16 @@ public class ProjectV2{
           Group1Data.add(CSGroup1Data);
           col = line.split("\\,", 5);
       //System.out.print(Group1Data + " | ");
+      
       for(int c = col.length-1; c < col.length; c++){
         array2[k] = col[c];
         k++;
+        //System.out.println(col[2]);
         /*if(c == col.length-1){
-          System.out.println();
+          System.out.println(col[k]);
         }*/
       }
+      
         }
 
         Ztest test = new Ztest(array2, arrayD, array1, arrayP);
@@ -70,6 +73,7 @@ public class ProjectV2{
         for (double num : arrayD){
           if(num != 0){
           System.out.println(num);
+
           }
         }
         /** 
