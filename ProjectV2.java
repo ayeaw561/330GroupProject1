@@ -53,13 +53,14 @@ public class ProjectV2{
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         while((line = br.readLine()) != null){
           String CSGroup1Data = br.readLine();
-          Group1Data.add(CSGroup1Data);
+          Group1Data.add(line);
           col = line.split("\\,", 5);
       //System.out.print(Group1Data + " | ");
+
       
       for(int c = col.length-1; c < col.length; c++){
-        array2[k] = col[c];
-        k++;
+        array2[c] = col[c];
+        System.out.print(array2[c] + "\n");
         //System.out.println(col[2]);
         /*if(c == col.length-1){
           System.out.println(col[k]);
@@ -72,7 +73,7 @@ public class ProjectV2{
         test.gpa(array2, arrayD);
         for (double num : arrayD){
           if(num != 0){
-          System.out.println(num);
+          //System.out.println(num);
 
           }
         }
