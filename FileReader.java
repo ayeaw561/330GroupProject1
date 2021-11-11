@@ -32,8 +32,8 @@ public class FileReader {
 
         Ztest test = new Ztest(SampleData, PopulationData);
         System.out.println(Arrays.toString(test.getPop()));
-        System.out.println(test.getZscore());
-
+        System.out.println("Sample Z-Score: "+test.getZscore());
+        System.out.println("Sample Mean: "+test.sampleMean());
         System.out.println();
 
         do{
@@ -46,7 +46,8 @@ public class FileReader {
 
         Ztest test2 = new Ztest(SampleData, GroupData);
         System.out.println(Arrays.toString(test2.getPop()));
-        System.out.println(test2.getZscore());
+        System.out.println("Group Z-Score: "+test2.getZscore());
+        System.out.println("Group Mean: "+test2.sampleMean());
 
     }
 

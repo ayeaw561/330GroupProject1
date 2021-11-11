@@ -44,6 +44,14 @@ public class Ztest {
         return arrayPGPA;
     }
 
+    public double sampleMean(){
+        return sampleMean;
+    }
+    
+    public double popMean(){
+        return popMean;
+    }
+
     public static void setZscore(double z){
         zScore = z;
     }
