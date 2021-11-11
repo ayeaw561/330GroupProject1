@@ -52,7 +52,7 @@ public class ProjectV2{
         SequenceInputStream is = new SequenceInputStream(is1, is2);
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         while((line = br.readLine()) != null){
-          String CSGroup1Data = br.readLine();
+          //String CSGroup1Data = br.readLine();
           Group1Data.add(line);
           col = line.split("\\,", 5);
       //System.out.print(Group1Data + " | ");
@@ -73,7 +73,7 @@ public class ProjectV2{
         test.gpa(array2, arrayD);
         for (double num : arrayD){
           if(num != 0){
-          //System.out.println(num);
+          System.out.println(num);
 
           }
         }
