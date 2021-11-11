@@ -69,14 +69,14 @@ public class ProjectV2{
       
         }
 
-        Ztest test = new Ztest(array2, arrayD, array1, arrayP);
+       /* Ztest test = new Ztest(array2, arrayD, array1, arrayP);
         test.gpa(array2, arrayD);
         for (double num : arrayD){
           if(num != 0){
           //System.out.println(num);
 
           }
-        }
+        }*/
         /** 
         for(int b = 1; b < Group1.size(); b++){
           String filename = (Group1.get(b));

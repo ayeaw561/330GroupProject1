@@ -1,8 +1,8 @@
-
+import java.util.*;
 public class Ztest {
 
-    public static String[] arrayPopulation;
-    public static String[] arraySample;
+    public static ArrayList<String> arrayPopulation;
+    public static ArrayList<String> arraySample;
     public static double[] arraySGPA;
     public static double[] arrayPGPA;
     public static double sampleMean; //section or group
@@ -10,12 +10,21 @@ public class Ztest {
     public static double popSD; //total population of data SD
     public static double zScore;
 
-    public Ztest(String[] arraySam, double[] arraySamGPA, String[] arrayPop, double[] arrayPopGPA){
+    public Ztest(ArrayList<String> arraySam, ArrayList<String> arrayPop){
 
         arrayPopulation = arrayPop;
         arraySample = arraySam;
-        arrayPopGPA = arrayPGPA;
-        arraySamGPA = arraySGPA;
+        double[] array = new double[arrayPopulation.size()];
+        double[] array2 = new double[arraySample.size()];
+        arrayPGPA = array;
+        arraySGPA = array2;
+        gpa(arrayPopulation, arrayPGPA);
+        gpa(arraySample, arraySGPA);
+        popmean(arrayPGPA);
+        samplemean(arraySGPA);
+        calculateSD(arrayPGPA);
+        ztest();
+        
     }
 
     Ztest(){
@@ -23,42 +32,46 @@ public class Ztest {
     }
 
     public static void main(String[] args){
+        gpa(arrayPopulation, arrayPGPA);
 
-    //String[] arraylist = {"A","B", "A-", "C","F","B+", "D-"};
-        //GPAconvert con = new GPAconvert();
-        //double[] arraylistVal = new double[arraylist.length];
-
-       // gpa(arraylist, arraylistVal);
-
-  // popSD = calculateSD(arraylistVal);
-   //sampleMean = mean();
-   //popMean = mean();
-  // System.out.println(popSD);
-
-   // zScore = (sampleMean - popMean)/popSD;
     }
 
     public double getZscore(){
         return zScore;
     }
 
+    public double[] getPop(){
+        return arrayPGPA;
+    }
+
     public static void setZscore(double z){
         zScore = z;
     }
 
-    public double mean(double[] array)
+    public void ztest(){
+        zScore = (popMean - sampleMean)/ popSD;
+    }
+
+    public static void samplemean(double[] array)
     {
         double sum = 0;
         int length = array.length;
         for(double num : array){
             sum += num;
         }
-        double mean = sum/length;
-
-        return mean;
+        sampleMean = sum/length;
+    }
+    public static void popmean(double[] array)
+    {
+        double sum = 0;
+        int length = array.length;
+        for(double num : array){
+            sum += num;
+        }
+        popMean = sum/length;
     }
 
-    public double calculateSD(double arrayNum[])
+    public static void calculateSD(double arrayNum[])
     {
         double sum = 0.0, standardDeviation = 0.0;
         int length = arrayNum.length;
@@ -73,14 +86,15 @@ public class Ztest {
             standardDeviation += Math.pow(num - mean, 2);
         }
 
-        return Math.sqrt(standardDeviation/length);
+        popSD = Math.sqrt(standardDeviation/length);
     }
 
-    public double[] gpa(String[] arrayl, double[] arraylVal){
-
-        for(int i = 0; i < arrayl.length; i++){
-            if(arrayl[i] == null){break;}
-            switch(arrayl[i])
+    public static void gpa(ArrayList<String> arrayl, double[] arraylVal){
+        
+        for(int i = 0; i < arrayl.size(); i++){
+            //System.out.println(arrayl.get(i).toString());
+            //if(arrayl.get(i).toString() == null){break;}
+            switch(arrayl.get(i).toString())
             {
                 case "A" :
                     arraylVal[i] = 4;
@@ -134,6 +148,6 @@ public class Ztest {
         
         }
 
-        return arraylVal;
+
     }
 }
