@@ -3,12 +3,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 public class FileReader {
-    public static ArrayList<String> NameArray = new ArrayList<>();
-    public static ArrayList<String> GroupName = new ArrayList<>();
-    public static ArrayList<String> PopulationData = new ArrayList<>();
-    public static ArrayList<String> SampleData = new ArrayList<>();
-    public static ArrayList<String> GroupData = new ArrayList<>();
-    public static ArrayList<String> GroupNameArray = new ArrayList<>();
+    private static ArrayList<String> NameArray = new ArrayList<>();
+    private static ArrayList<String> GroupName = new ArrayList<>();
+    private static ArrayList<String> PopulationData = new ArrayList<>();
+    private static ArrayList<String> SampleData = new ArrayList<>();
+    private static ArrayList<String> GroupData = new ArrayList<>();
+    private static ArrayList<String> GroupNameArray = new ArrayList<>();
     public static void main(String[] args) throws Exception{
 
         Scanner scan = new Scanner(System.in);
@@ -20,7 +20,7 @@ public class FileReader {
 
         while(!read.toLowerCase().equals("n")){
 
-        compareClass();
+        compareClass(scan);
 
         System.out.print("Would you like to compare this class to another group? (Y/N)");
         read = scan.nextLine();
@@ -28,21 +28,18 @@ public class FileReader {
             break;
         }
 
-        compareGroup();
+        compareGroup(scan);
 
         System.out.print("Would you like to compare another? (Y/N)");
         read = scan.nextLine();
 
         }
 
-        scan.close();
-
     }
 
-    private static void compareGroup() throws Exception{
+    private static void compareGroup(Scanner scan) throws Exception{
         String fName;
         File file2;
-        Scanner scan = new Scanner(System.in);
 
         for(int i = 0; i < GroupName.size(); i++){
             String strin = GroupName.get(i);
@@ -62,13 +59,11 @@ public class FileReader {
         System.out.println("Group Z-Score: "+test2.getZscore());
         System.out.println("Group Mean: "+test2.sampleMean());
 
-        scan.close();
     }
 
-    private static void compareClass() throws Exception{
+    private static void compareClass(Scanner scan) throws Exception{
         String fileName;
         File file;
-        Scanner scan = new Scanner(System.in);
 
         for(int i = 0; i < GroupNameArray.size(); i++){
             String strin = GroupNameArray.get(i);
@@ -91,7 +86,6 @@ public class FileReader {
             System.out.println("Sample Mean: "+test.sampleMean());
             System.out.println();
 
-            scan.close();
     }
 
 
