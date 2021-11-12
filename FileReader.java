@@ -8,33 +8,46 @@ public class FileReader {
     public static ArrayList<String> PopulationData = new ArrayList<>();
     public static ArrayList<String> SampleData = new ArrayList<>();
     public static ArrayList<String> GroupData = new ArrayList<>();
+    public static ArrayList<String> GroupNameArray = new ArrayList<>();
     public static void main(String[] args) throws Exception{
 
-        File file, file2;
-        String fileName, fName;
+        Scanner scan = new Scanner(System.in);
+        String read = "Y";
         
         readNames("AllGroups.txt");
 
-        for(int i = 0; i < NameArray.size(); i++){
-            String strin = NameArray.get(i);
-            System.out.println(strin);
-            readFile(strin);
+        readGroupFile("COMSCprogram.GRP", GroupNameArray, PopulationData);
+
+        while(!read.toLowerCase().equals("n")){
+
+        compareClass();
+
+        System.out.print("Would you like to compare this class to another group? (Y/N)");
+        read = scan.nextLine();
+        if(read.toLowerCase().equals("n")){
+            break;
         }
-        
+
+        compareGroup();
+
+        System.out.print("Would you like to compare another? (Y/N)");
+        read = scan.nextLine();
+
+        }
+
+        scan.close();
+
+    }
+
+    private static void compareGroup() throws Exception{
+        String fName;
+        File file2;
         Scanner scan = new Scanner(System.in);
-        do{
-        System.out.println("\nEnter the class you would like to compare: ");
-        fileName = scan.nextLine();
-        file = new File(fileName);
-        }while(!file.exists());
 
-        readFiletoArray(fileName, SampleData);
-
-        Ztest test = new Ztest(SampleData, PopulationData);
-        System.out.println(Arrays.toString(test.getPop()));
-        System.out.println("Sample Z-Score: "+test.getZscore());
-        System.out.println("Sample Mean: "+test.sampleMean());
-        System.out.println();
+        for(int i = 0; i < GroupName.size(); i++){
+            String strin = GroupName.get(i);
+            System.out.println(strin);
+        }
 
         do{
             System.out.println("\nEnter the group you would like to compare: ");
@@ -42,13 +55,43 @@ public class FileReader {
             file2 = new File(fName);
             }while(!file2.exists());
 
-        readGroupFile(fileName);
-
+        readGroupFile(fName, NameArray, GroupData);
+         
         Ztest test2 = new Ztest(SampleData, GroupData);
         System.out.println(Arrays.toString(test2.getPop()));
         System.out.println("Group Z-Score: "+test2.getZscore());
         System.out.println("Group Mean: "+test2.sampleMean());
 
+        scan.close();
+    }
+
+    private static void compareClass() throws Exception{
+        String fileName;
+        File file;
+        Scanner scan = new Scanner(System.in);
+
+        for(int i = 0; i < GroupNameArray.size(); i++){
+            String strin = GroupNameArray.get(i);
+            System.out.println(strin);
+        }
+
+        do{
+            System.out.println("\nEnter the class you would like to compare to all COMSC programs: ");
+            fileName = scan.nextLine();
+            file = new File(fileName);
+            }while(!file.exists());
+    
+    
+            readFiletoArray(fileName, SampleData);
+    
+            Ztest test = new Ztest(SampleData, PopulationData);
+            System.out.println(Arrays.toString(test.getPop()));
+            System.out.println(Arrays.toString(test.getSam()));
+            System.out.println("Sample Z-Score: "+test.getZscore());
+            System.out.println("Sample Mean: "+test.sampleMean());
+            System.out.println();
+
+            scan.close();
     }
 
 
@@ -64,107 +107,58 @@ public class FileReader {
 
         br.close();
         fstream.close();
-
-        for(int i = 0; i < GroupName.size(); i++){
-            FileInputStream arrstream = new FileInputStream(GroupName.get(i));
-            BufferedReader ar = new BufferedReader(new InputStreamReader(arrstream));
-            String str;
-            String groupName = ar.readLine();
-            System.out.println(groupName);
-
-            while ((str = ar.readLine()) != null)   {
-                NameArray.add(str);
-                //System.out.println(str);
-            }
-        }
-        fstream.close();
     }
 
-    private static void readFile(String name) throws Exception{
-        String[] col;
-        
-        FileInputStream fstream = new FileInputStream(name);
-        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-        String strLine;
-        String groupName = br.readLine();
-        //System.out.println(groupName);
-
-        while ((strLine = br.readLine()) != null)   {
-
-          strLine = strLine.replace((char)9, ',');
-          //System.out.println(strLine);
-          col = strLine.split("\\,", 5);
-          PopulationData.add(col[col.length-1]); 
-          //System.out.println(col[col.length-1]);
-        
-
-        }
-
-        //Close the input stream
-        fstream.close();
-
-
-        }
-
     private static void readFiletoArray(String name, ArrayList<String> array) throws Exception{
+
         String[] col;
         FileInputStream fstream = new FileInputStream(name);
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
         String strLine;
+        br.readLine();
     
         while ((strLine = br.readLine()) != null)   {
     
             strLine = strLine.replace((char)9, ',');
-            //System.out.println(strLine);
             col = strLine.split("\\,", 5);
             array.add(col[col.length-1]); 
-            //System.out.println(col[col.length-1]);
-            
-    
         }
-    
-        //Close the input stream
+   
+        br.close();
         fstream.close();
     
     
     }
 
-    private static void readGroupFile(String name) throws Exception{
-        ArrayList<String> nameArr = new ArrayList<>();
+    private static void readGroupFile(String name, ArrayList<String> arraySz, ArrayList<String> arrayValues) throws Exception{
+    
         String[] col;
-        FileInputStream fstream = new FileInputStream("COMSC330.GRP");
+        FileInputStream fstream = new FileInputStream(name);
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
         String strLine;
-        String groupName = br.readLine();
-        //System.out.println(groupName);
+        br.readLine();
     
         while ((strLine = br.readLine()) != null)   {
-            nameArr.add(strLine);
-    
+            arraySz.add(strLine);
         }
 
         br.close();
         fstream.close();
 
-        for(int i = 0; i < nameArr.size(); i++){
-            FileInputStream arrstream = new FileInputStream(nameArr.get(i));
+        for(int i = 0; i < arraySz.size(); i++){
+            FileInputStream arrstream = new FileInputStream(arraySz.get(i));
             BufferedReader ar = new BufferedReader(new InputStreamReader(arrstream));
             String str;
             ar.readLine();
-            //System.out.println(groupName);
+            
 
             while((str = ar.readLine()) != null){
+
                 str = str.replace((char)9, ',');
-                //System.out.println(str);
                 col = str.split("\\,", 5);
-                GroupData.add(col[col.length-1]); 
-                //System.out.println(col[col.length-1]);
+                arrayValues.add(col[col.length-1]); 
             }
-    
-        //Close the input stream
-        fstream.close();
-    
-    
-    }
+
+        }
     }
 }

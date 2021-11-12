@@ -31,17 +31,16 @@ public class Ztest {
         
     }
 
-    public static void main(String[] args){
-        gpa(arrayPopulation, arrayPGPA);
-
-    }
-
     public double getZscore(){
         return zScore;
     }
 
     public double[] getPop(){
         return arrayPGPA;
+    }
+
+    public double[] getSam(){
+        return arraySGPA;
     }
 
     public double sampleMean(){
@@ -77,6 +76,16 @@ public class Ztest {
             sum += num;
         }
         popMean = sum/length;
+    }
+
+    public static void mean(double[] array, double value)
+    {
+        double sum = 0;
+        int length = array.length;
+        for(double num : array){
+            sum += num;
+        }
+        value = sum/length;
     }
 
     public static void calculateSD(double arrayNum[])
