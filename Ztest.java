@@ -100,16 +100,6 @@ public class Ztest {
         popMean = sum/length;
     }
 
-    public static void mean(double[] array, double value)
-    {
-        double sum = 0;
-        int length = array.length;
-        for(double num : array){
-            sum += num;
-        }
-        value = sum/length;
-    }
-
     public static void calculateSD(double arrayNum[])
     {
         double sum = 0.0, standardDeviation = 0.0;
