@@ -55,8 +55,14 @@ public class FileReader {
         readGroupFile(fName, NameArray, GroupData);
          
         Ztest test2 = new Ztest(SampleData, GroupData);
-        System.out.println("Selected Group Data: ");
-        System.out.println(Arrays.toString(test2.getPop()));
+        //System.out.println("Selected Group Data: ");
+       //System.out.println(Arrays.toString(test2.getPop()));
+        System.out.println("Group Data : ");
+        System.out.println(test2.getPopKeys().toString());
+        System.out.println(test2.getPopValues().toString());
+        System.out.println("Selected Class Data : ");
+        System.out.println(test2.getSamKeys().toString());
+        System.out.println(test2.getSamValues().toString());
         System.out.println("Calculations: ");
         System.out.println("Compaired Group Z-Score: "+test2.getZscore());
         System.out.println("Compaired Group Mean: "+test2.sampleMean());
@@ -83,8 +89,13 @@ public class FileReader {
     
             Ztest test = new Ztest(SampleData, PopulationData);
             //System.out.println(Arrays.toString(test.getPop()));
+            //System.out.println(Arrays.toString(test.getSam()));
+            System.out.println("Population Data : ");
+            System.out.println(test.getPopKeys().toString());
+            System.out.println(test.getPopValues().toString());
             System.out.println("Selected Class Data : ");
-            System.out.println(Arrays.toString(test.getSam()));
+            System.out.println(test.getSamKeys().toString());
+            System.out.println(test.getSamValues().toString());
             System.out.println("Calculations: ");
             System.out.println("Compaired Class Z-Score: "+test.getZscore());
             System.out.println("Compaired Class Mean: "+test.sampleMean());
