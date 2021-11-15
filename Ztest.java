@@ -232,7 +232,7 @@ public class Ztest {
                     map.replace(grade, value);
                 break;
             }
-            System.out.println(map.values().toString());
+            //System.out.println(map.values().toString());
         
         }
 
