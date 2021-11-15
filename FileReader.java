@@ -77,7 +77,7 @@ public class FileReader {
             String strin = GroupNameArray.get(i);
             System.out.println(strin);
         }
-
+//prompts user 
         do{
             System.out.println("\nEnter the class you would like to compare to all COMSC programs: ");
             fileName = scan.nextLine();
