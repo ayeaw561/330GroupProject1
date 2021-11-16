@@ -12,6 +12,7 @@ public class FileReader {
     public static void main(String[] args) throws Exception{
 
         Scanner scan = new Scanner(System.in);
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String read = "Y";
         
         readNames("AllGroups.txt");
@@ -21,9 +22,9 @@ public class FileReader {
         while(!read.toLowerCase().equals("n")){
 
         compareClass(scan);
-
+        
         System.out.print("Would you like to compare this class to another group? (Y/N)");
-        read = scan.nextLine();
+        read = br.readLine();
         if(read.toLowerCase().equals("n")){
             break;
         }
@@ -31,24 +32,33 @@ public class FileReader {
         compareGroup(scan);
 
         System.out.print("Would you like to compare another? (Y/N)");
-        read = scan.nextLine();
+        read = br.readLine();
 
         }
 
     }
 
     private static void compareGroup(Scanner scan) throws Exception{
+        int name, n;
         String fName;
         File file2;
 
         for(int i = 0; i < GroupName.size(); i++){
+            n = i + 1;
             String strin = GroupName.get(i);
-            System.out.println(strin);
+            System.out.println(n + ". " + strin);
         }
 
         do{
-            System.out.println("\nEnter the group you would like to compare: ");
-            fName = scan.nextLine();
+            System.out.println("\nEnter the group you would like to compare: (Enter a ##) ");
+            int j = GroupName.size();
+            name = check(scan);
+            while(!(name <= j && name > 0)){
+                System.out.println("try again");
+                name = check(scan);
+            }
+            fName = GroupName.get(name - 1);
+            System.out.println("File: " + fName);
             file2 = new File(fName);
             }while(!file2.exists());
 
@@ -72,15 +82,25 @@ public class FileReader {
     private static void compareClass(Scanner scan) throws Exception{
         String fileName;
         File file;
+        int name, n;
 
         for(int i = 0; i < GroupNameArray.size(); i++){
+            n = i + 1;
             String strin = GroupNameArray.get(i);
-            System.out.println(strin);
+            System.out.println(n + ". " + strin);
         }
 
         do{
-            System.out.println("\nEnter the class you would like to compare to all COMSC programs: ");
-            fileName = scan.nextLine();
+            System.out.println("\nEnter the class you would like to compare to all COMSC programs: (Enter a ##) ");
+            int j = GroupNameArray.size();
+            name = check(scan);
+            while(!(name <= j && name > 0)){
+                System.out.println("try again");
+                name = check(scan);
+            }
+
+            fileName = GroupNameArray.get(name - 1);
+            System.out.println("File: " + fileName);
             file = new File(fileName);
             }while(!file.exists());
     
@@ -103,6 +123,15 @@ public class FileReader {
 
     }
 
+    
+    private static int check(Scanner scan){
+    while(!scan.hasNextInt()){
+        System.out.println("try again");
+                scan.next();
+        }
+        return scan.nextInt();
+    }
+    
 
     private static void readNames(String name) throws Exception{
         
