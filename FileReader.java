@@ -1,6 +1,5 @@
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner;
 public class FileReader {
     private static ArrayList<String> NameArray = new ArrayList<>();
