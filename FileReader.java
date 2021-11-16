@@ -14,6 +14,7 @@ public class FileReader {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String read = "Y";
         
+        //reads and stores group files
         readNames("AllGroups.txt");
 
         readGroupFile("COMSCprogram.GRP", GroupNameArray, PopulationData);
@@ -22,6 +23,7 @@ public class FileReader {
 
         compareClass(scan);
         
+        //prompts user compare selected class to a group
         System.out.print("Would you like to compare this class to another group? (Y/N)");
         read = br.readLine();
         if(read.toLowerCase().equals("n")){
@@ -30,6 +32,7 @@ public class FileReader {
 
         compareGroup(scan);
 
+        //prompts user to continue comparing
         System.out.print("Would you like to compare another? (Y/N)");
         read = br.readLine();
 
@@ -48,6 +51,7 @@ public class FileReader {
             System.out.println(n + ". " + strin);
         }
 
+        //comparing class to group
         do{
             System.out.println("\nEnter the group you would like to compare: (Enter a ##) ");
             int j = GroupName.size();
@@ -62,7 +66,7 @@ public class FileReader {
             }while(!file2.exists());
 
         readGroupFile(fName, NameArray, GroupData);
-         
+        //dispalying group data
         Ztest test2 = new Ztest(SampleData, GroupData);
         //System.out.println("Selected Group Data: ");
        //System.out.println(Arrays.toString(test2.getPop()));
@@ -88,7 +92,7 @@ public class FileReader {
             String strin = GroupNameArray.get(i);
             System.out.println(n + ". " + strin);
         }
-//prompts user 
+        //prompts user to select a class to compare 
         do{
             System.out.println("\nEnter the class you would like to compare to all COMSC programs: (Enter a ##) ");
             int j = GroupNameArray.size();
@@ -105,7 +109,8 @@ public class FileReader {
     
     
             readFiletoArray(fileName, SampleData);
-    
+            
+            //displaying class data
             Ztest test = new Ztest(SampleData, PopulationData);
             //System.out.println(Arrays.toString(test.getPop()));
             //System.out.println(Arrays.toString(test.getSam()));
@@ -122,7 +127,7 @@ public class FileReader {
 
     }
 
-    
+    //prompts user to try again if the file isnt found.
     private static int check(Scanner scan){
     while(!scan.hasNextInt()){
         System.out.println("try again");
@@ -145,7 +150,7 @@ public class FileReader {
         br.close();
         fstream.close();
     }
-
+    //reads in the group data
     private static void readFiletoArray(String name, ArrayList<String> array) throws Exception{
 
         String[] col;
@@ -157,7 +162,7 @@ public class FileReader {
         while ((strLine = br.readLine()) != null)   {
     
             strLine = strLine.replace((char)9, ',');
-            col = strLine.split("\\,", 5);
+            col = strLine.split("\\,", 5); // seperates data by colunm 
             array.add(col[col.length-1]); 
         }
    
@@ -166,7 +171,7 @@ public class FileReader {
     
     
     }
-
+    //reads in the class data
     private static void readGroupFile(String name, ArrayList<String> arraySz, ArrayList<String> arrayValues) throws Exception{
     
         String[] col;
