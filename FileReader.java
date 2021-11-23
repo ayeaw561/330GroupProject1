@@ -1,4 +1,7 @@
+
 import java.io.*;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 public class FileReader {
@@ -8,6 +11,7 @@ public class FileReader {
     private static ArrayList<String> SampleData = new ArrayList<>();
     private static ArrayList<String> GroupData = new ArrayList<>();
     private static ArrayList<String> GroupNameArray = new ArrayList<>();
+    private static NumberFormat form = new DecimalFormat("#0.00");
     public static void main(String[] args) throws Exception{
 
         Scanner scan = new Scanner(System.in);
@@ -77,8 +81,8 @@ public class FileReader {
         System.out.println(test2.getSamKeys().toString());
         System.out.println(test2.getSamValues().toString());
         System.out.println("Calculations: ");
-        System.out.println("Compaired Group Z-Score: "+test2.getZscore());
-        System.out.println("Compaired Group Mean: "+test2.sampleMean());
+        System.out.println("Compaired Group Z-Score: "+form.format(test2.getZscore()));
+        System.out.println("Compaired Group Mean: "+form.format(test2.sampleMean()));
 
     }
 
@@ -121,8 +125,8 @@ public class FileReader {
             System.out.println(test.getSamKeys().toString());
             System.out.println(test.getSamValues().toString());
             System.out.println("Calculations: ");
-            System.out.println("Compaired Class Z-Score: "+test.getZscore());
-            System.out.println("Compaired Class Mean: "+test.sampleMean());
+            System.out.println("Compaired Class Z-Score: "+form.format(test.getZscore()));
+            System.out.println("Compaired Class Mean: "+form.format(test.sampleMean()));
             System.out.println();
 
     }
