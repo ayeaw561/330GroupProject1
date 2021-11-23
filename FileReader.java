@@ -11,7 +11,7 @@ public class FileReader {
     private static ArrayList<String> SampleData = new ArrayList<>();
     private static ArrayList<String> GroupData = new ArrayList<>();
     private static ArrayList<String> GroupNameArray = new ArrayList<>();
-    private static NumberFormat form = new DecimalFormat("#0.00");
+    private static NumberFormat form = new DecimalFormat("#0.000");
     public static void main(String[] args) throws Exception{
 
         Scanner scan = new Scanner(System.in);
