@@ -22,7 +22,7 @@ public class FileReader {
         readNames("AllGroups.txt");
 
         readGroupFile("COMSCprogram.GRP", GroupNameArray, PopulationData);
-
+        
         while(!read.toLowerCase().equals("n")){
 
         compareClass(scan);
@@ -72,8 +72,6 @@ public class FileReader {
         readGroupFile(fName, NameArray, GroupData);
         //dispalying group data
         Ztest test2 = new Ztest(SampleData, GroupData);
-        //System.out.println("Selected Group Data: ");
-       //System.out.println(Arrays.toString(test2.getPop()));
         System.out.println("Group Data : ");
         System.out.println(test2.getPopKeys().toString());
         System.out.println(test2.getPopValues().toString());
@@ -108,7 +106,7 @@ public class FileReader {
 
             fileName = GroupNameArray.get(name - 1);
             System.out.println("File: " + fileName);
-            file = new File(fileName);
+            file = new File("./classes/" + fileName);
             }while(!file.exists());
     
     
@@ -116,8 +114,6 @@ public class FileReader {
             
             //displaying class data
             Ztest test = new Ztest(SampleData, PopulationData);
-            //System.out.println(Arrays.toString(test.getPop()));
-            //System.out.println(Arrays.toString(test.getSam()));
             System.out.println("Population Data : ");
             System.out.println(test.getPopKeys().toString());
             System.out.println(test.getPopValues().toString());
@@ -158,7 +154,7 @@ public class FileReader {
     private static void readFiletoArray(String name, ArrayList<String> array) throws Exception{
 
         String[] col;
-        FileInputStream fstream = new FileInputStream(name);
+        FileInputStream fstream = new FileInputStream("./classes/" + name);
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
         String strLine;
         br.readLine();
@@ -192,7 +188,7 @@ public class FileReader {
         fstream.close();
 
         for(int i = 0; i < arraySz.size(); i++){
-            FileInputStream arrstream = new FileInputStream(arraySz.get(i));
+            FileInputStream arrstream = new FileInputStream("./classes/" + arraySz.get(i));
             BufferedReader ar = new BufferedReader(new InputStreamReader(arrstream));
             String str;
             ar.readLine();
