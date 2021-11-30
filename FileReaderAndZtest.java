@@ -2,7 +2,6 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-//import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,7 +10,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-//import java.util.Set;
 import java.lang.String;
 
 public class FileReaderAndZtest {
@@ -407,11 +405,7 @@ public class FileReaderAndZtest {
                     value += 1;
                     map.replace(grade, value);
                 break;
-            }
-            //System.out.println(map.values().toString());
-        
+            }      
         }
-
-
     }
 }
