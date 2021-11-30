@@ -2,7 +2,7 @@ import java.io.*;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collection;
+//import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
+//import java.util.Set;
 import java.lang.String;
 
 public class FileReaderAndZtest {
@@ -92,19 +92,18 @@ public class FileReaderAndZtest {
 
         readGroupFile(fName, NameArray, GroupData);
         //dispalying group data
-        Ztest test2 = new Ztest(SampleData, GroupData);
-        //System.out.println("Selected Group Data: ");
-       //System.out.println(Arrays.toString(test2.getPop()));
+        ztest(SampleData, GroupData);
         System.out.println("Group Data : ");
-        System.out.println(test2.getPopKeys().toString());
-        System.out.println(test2.getPopValues().toString());
+        System.out.println(PopulationMap.keySet().toString());
+        System.out.println(PopulationMap.values().toString());
         System.out.println("Selected Class Data : ");
-        System.out.println(test2.getSamKeys().toString());
-        System.out.println(test2.getSamValues().toString());
+        System.out.println(SampleMap.keySet().toString());
+        System.out.println(SampleMap.values().toString());
         System.out.println("Calculations: ");
-        System.out.println("Compaired Group Z-Score: "+form.format(test2.getZscore()));
-        System.out.println("Compaired Group Mean: "+form.format(test2.sampleMean()));
-
+        System.out.println("Compaired Z-Score: "+form.format(zScore));
+        System.out.println("Compaired Group Mean: "+form.format(popMean));
+        System.out.println("Compaired Class Mean: "+form.format(sampleMean));
+        System.out.println();
     }
 
     private static void compareClass(Scanner scan) throws Exception{
@@ -136,18 +135,17 @@ public class FileReaderAndZtest {
             readFiletoArray(fileName, SampleData);
             
             //displaying class data
-            Ztest test = new Ztest(SampleData, PopulationData);
-            //System.out.println(Arrays.toString(test.getPop()));
-            //System.out.println(Arrays.toString(test.getSam()));
+            ztest(SampleData, PopulationData);
             System.out.println("Population Data : ");
-            System.out.println(test.getPopKeys().toString());
-            System.out.println(test.getPopValues().toString());
+            System.out.println(PopulationMap.keySet().toString());
+            System.out.println(PopulationMap.values().toString());
             System.out.println("Selected Class Data : ");
-            System.out.println(test.getSamKeys().toString());
-            System.out.println(test.getSamValues().toString());
+            System.out.println(SampleMap.keySet().toString());
+            System.out.println(SampleMap.values().toString());
             System.out.println("Calculations: ");
-            System.out.println("Compaired Class Z-Score: "+form.format(test.getZscore()));
-            System.out.println("Compaired Class Mean: "+form.format(test.sampleMean()));
+            System.out.println("Compaired Z-Score: "+form.format(zScore));
+            System.out.println("Compaired Group Mean: "+form.format(popMean));
+            System.out.println("Compaired Class Mean: "+form.format(sampleMean));
             System.out.println();
 
     }
@@ -228,7 +226,8 @@ public class FileReaderAndZtest {
 
         }
     }
-    public void Ztest(ArrayList<String> arraySam, ArrayList<String> arrayPop){
+    //Ztest driver
+    public static void ztest(ArrayList<String> arraySam, ArrayList<String> arrayPop){
         PopulationMap.clear();
         SampleMap.clear();
         arrayPopulation = arrayPop;
@@ -243,56 +242,18 @@ public class FileReaderAndZtest {
         PopulationMap = sortByValue(PMap);
         gpa(arraySample, arraySGPA, SMap);
         SampleMap = sortByValue(SMap);
-        popmean(arrayPGPA);
+        populationMean(arrayPGPA);
         samplemean(arraySGPA);
         calculateSD(arrayPGPA);
-        ztest();
+        test();
         
-    }
-    //Ztest(){
-        
-    //}
-
-    public double getZscore(){
-        return zScore;
-    }
-
-    public Set<String> getPopKeys(){
-        return PopulationMap.keySet();
-    }
-
-    public Set<String> getSamKeys(){
-        return SampleMap.keySet();
-    }
-
-    public Collection<Integer> getPopValues(){
-        return PopulationMap.values();
-    }
-    public Collection<Integer> getSamValues(){
-        return SampleMap.values();
-    }
-
-    public double[] getPop(){
-        return arrayPGPA;
-    }
-
-    public double[] getSam(){
-        return arraySGPA;
-    }
-
-    public double sampleMean(){
-        return sampleMean;
-    }
-    
-    public double popMean(){
-        return popMean;
     }
 
     public static void setZscore(double z){
         zScore = z;
     }
 
-    public void ztest(){
+    public static void test(){
         zScore = (popMean - sampleMean)/ popSD;
     }
 
@@ -305,7 +266,7 @@ public class FileReaderAndZtest {
         }
         sampleMean = sum/length;
     }
-    public static void popmean(double[] array)
+    public static void populationMean(double[] array)
     {
         double sum = 0;
         int length = array.length;
