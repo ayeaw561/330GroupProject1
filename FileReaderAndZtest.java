@@ -20,7 +20,7 @@ public class FileReaderAndZtest {
     private static ArrayList<String> GroupData = new ArrayList<>();
     private static ArrayList<String> GroupNameArray = new ArrayList<>();
     private static NumberFormat form = new DecimalFormat("#0.000");
-
+    public static boolean sig = false;
     public static ArrayList<String> arrayPopulation;
     public static ArrayList<String> arraySample;
     public static double[] arraySGPA;
@@ -99,6 +99,7 @@ public class FileReaderAndZtest {
         System.out.println(SampleMap.values().toString());
         System.out.println("Calculations: ");
         System.out.println("Compaired Z-Score: "+form.format(zScore));
+        sigfig();
         System.out.println("Compaired Group Mean: "+form.format(popMean));
         System.out.println("Compaired Class Mean: "+form.format(sampleMean));
         System.out.println();
@@ -142,6 +143,7 @@ public class FileReaderAndZtest {
             System.out.println(SampleMap.values().toString());
             System.out.println("Calculations: ");
             System.out.println("Compaired Z-Score: "+form.format(zScore));
+            sigfig();
             System.out.println("Compaired Group Mean: "+form.format(popMean));
             System.out.println("Compaired Class Mean: "+form.format(sampleMean));
             System.out.println();
@@ -155,6 +157,15 @@ public class FileReaderAndZtest {
                 scan.next();
         }
         return scan.nextInt();
+    }
+
+    private static void sigfig(){
+        if(zScore < -2.0 || zScore > 2.0){
+            sig = true;
+            System.out.println("Z-score is significant!");
+        }else{
+            System.out.println("Z-score is not significant!");
+        }
     }
     
 
